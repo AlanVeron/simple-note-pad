@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Block de Notas</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5dc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    textarea {
+      width: 90%;
+      height: 70vh;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: #fdfaf3;
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>📝 Block de Notas</h1>
+  <textarea id="notas" placeholder="Escribe aquí..."></textarea>
+
+  <script>
+    const notas = document.getElementById("notas");
+    notas.value = localStorage.getItem("texto") || "";
+    notas.addEventListener("input", () => {
+      localStorage.setItem("texto", notas.value);
+    });
+
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("sw.js");
+    }
+  </script>
+</body>
+</html>
